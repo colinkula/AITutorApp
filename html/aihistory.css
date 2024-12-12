@@ -1,0 +1,150 @@
+.dynamic-navbar {
+  width: 100%;
+  z-index: 10; 
+  transition: background-color 0.3s ease-in-out;
+}
+
+.dynamic-navbar:hover {
+  background-color: rgba(0, 0, 0, 0.5) !important;
+}
+
+.nav-link {
+  color: black !important;
+  transition: color 0.3s ease-in-out;
+}
+
+.nav-link:hover {
+  color: #00aaff !important;
+}
+
+#logOutput, #tokenTotal {
+  background-color: #f9f9f9;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  padding: 20px; 
+  margin: 20px; 
+  border: 1px solid #ddd;
+}
+
+#logOutput .col-md-6 {
+  margin-bottom: 20px;
+}
+
+#logOutput .col-md-6 {
+  background-color: white;
+  border: 1px solid #ddd; 
+  border-radius: 8px; 
+  padding: 20px;
+}
+
+#logOutput .col-md-6.border-end {
+  border-right: 1px solid #ddd; 
+}
+
+#logOutput h5 {
+  font-weight: bold;
+  font-size: 1.2rem;
+  color: #333;
+  margin-bottom: 10px;
+}
+
+#logOutput p {
+  color: #555;
+  font-size: 0.95rem;
+  line-height: 1.4;
+}
+
+#logOutput .col-md-6 div {
+  font-family: Arial, sans-serif;
+  font-size: 0.9rem;
+  color: #444;
+}
+
+#logOutput .col-md-6 div ul {
+  padding-left: 20px;
+  list-style: disc;
+}
+
+#logOutput .col-md-6 div li {
+  margin-bottom: 5px;
+}
+
+#logOutput .col-md-6 div p {
+   margin-bottom: 10px;
+}
+
+#tokenTotal {
+  background-color: #f9f9f9;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  padding: 20px; 
+  margin: 20px; 
+  border: 1px solid #ddd; 
+  justify-content: center;
+  font-size: 25px;
+}
+
+.content-wrapper {
+    position: relative; 
+    background-color: #0873d8;
+    background-size: cover; 
+    background-position: center top; 
+    background-attachment: fixed; 
+    padding-top: 20px; 
+}
+
+.content-wrapper::before {
+    content: ''; 
+    position: absolute; 
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 200px;
+    background: linear-gradient(to bottom, rgba(255, 255, 255, 1) 0%, rgba(255, 255, 255, 0) 100%);
+    pointer-events: none;
+    z-index: 1; 
+}
+
+.content-wrapper::after {
+    content: ''; 
+    position: absolute; 
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(255, 255, 255, 0.5); 
+    pointer-events: none; 
+    z-index: 0; 
+}
+
+.content-wrapper > * {
+    position: relative; 
+    z-index: 2;
+}
+
+.page-title {
+    font-family: monaco;
+}
+
+.header-image {
+  height: 100px;
+}
+
+body {
+  padding: 0 !important;
+  margin: 0 !important;
+}
+
+.list-item {
+  display: flex;
+  justify-content: space-between; 
+  align-items: center; 
+  padding: 5px 0; 
+}
+
+.icon {
+  width: 30px;
+  height: auto; 
+  margin-left: 10px; 
+  vertical-align: middle;
+}

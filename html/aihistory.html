@@ -1,0 +1,141 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>AI History</title>
+    <!-- Include Bootstrap file -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <!-- Include Style Sheet file -->
+    <link rel="stylesheet" href="aihistory.css">
+    <!-- Include JQuery file -->
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+    <!-- Include JavaScript file -->
+    <script src="aihistory.js"></script>
+  </head>
+
+  <body>
+    <!-- Nav Bar -->
+    <nav class="navbar navbar-expand-lg dynamic-navbar">
+			<div class="container-fluid">
+				<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Hamburger Menu">
+					<span class="navbar-toggler-icon"></span>
+				</button>
+				<div class="collapse navbar-collapse" id="navbarNav">
+					<div class="navbar-nav">
+						<a class="nav-link" href="index.html">Home</a>
+						<a class="nav-link" href="colin.html">About Colin</a>
+            <a class="nav-link" href="miranda.html">About Miranda</a>
+            <a class="nav-link" href="aifront.html">AI Chat Box</a>
+            <a class="nav-link" href="aihistory.html">AI History</a>
+					</div>
+				</div>
+			</div>
+		</nav>
+  
+    <!-- Header Section -->
+    <header class="text-center py-5 bg-white">
+      <img src="images/Chat.jpg" alt="Header Image" class="header-image">
+      <h1 class="mt-3 page-title">AI History Page</h1>
+      <p>View all your previous questions and AI responses according to a selected filter!</p>
+    </header>
+
+    <div class="content-wrapper">
+    <!-- Instructions Section -->
+    <div class="container text-center my-5">
+      <div class="row">
+          <h2 class="mb-4 page-title">How to Use the AI History</h2>
+          <div class="col-md-8 mx-auto">
+              <div class="bg-light p-4 rounded shadow-sm">
+                  <ol class="list-group list-group-flush">
+                      <li class="list-group-item py-3">
+                          <strong>1. Choose a Filter for Sorting:</strong> Pick how you want to sort the history.
+                          <ul class="mt-2" style="list-style-type: none; padding-left: 0;">
+                            <li><img src="images/calender.jpg" alt="Date Icon" class="icon"> <strong>Date:</strong> Sort by the date (format: yyyy-mm-dd).</li>
+                            <li><img src="images/clock.jpg" alt="Time Icon" class="icon"> <strong>Time:</strong> Sort by the time (format: hh:mm:ss in 24-hour format).</li>
+                            <li><img src="images/min.jpg" alt="Min Cost Icon" class="icon"> <strong>Min Cost:</strong> Sort by the minimum cost (in tokens) of the API call to ChatGPT.</li>
+                            <li><img src="images/max.jpg" alt="Max Cost Icon" class="icon"> <strong>Max Cost:</strong> Sort by the maximum cost (in tokens) of the API call to ChatGPT.</li>
+                            <li><img src="images/prompt.png" alt="Max Cost Icon" class="icon"> <strong>Prompt:</strong> Sort by submitted user prompts.</li>
+                        </ul>
+                        <span class="text-danger">Note:</span> You can apply multiple filters at the same time.
+                      </li>
+                      <li class="list-group-item py-3">
+                          <strong>2. Apply Your Filter:</strong> Once you've selected a filter, click the <strong>Submit</strong> button to apply it and see the filtered history.
+                      </li>
+                      <li class="list-group-item py-3">
+                          <strong>3. View the History:</strong> Previous questions and AI responses will be shown based on the filter you chose.
+                      </li>
+                      <li class="list-group-item py-3">
+                          <strong>4. Reset the Filters:</strong> Click the <strong>Reset</strong> button to clear the filter and start fresh.
+                      </li>
+                  </ol>
+              </div>
+          </div>
+      </div>
+    </div>
+
+    <!-- Log Form Section -->
+    <section class="container my-5">
+      <h2 class="text-center mb-4 page-title">Sorting Filters</h2>
+  
+      <form id="logForm" class="bg-light p-4 rounded shadow-sm">
+        <!-- Date Field as Textarea -->
+        <div class="mb-3">
+          <label for="logDate" class="form-label">Date</label>
+          <textarea class="form-control" id="logDate" name="logDate" rows="1" placeholder="Enter date (format: yyyy-mm-dd)"></textarea>
+        </div>
+
+        <!-- Time Field -->
+        <div class="mb-3">
+          <label for="logTime" class="form-label">Time</label>
+          <textarea class="form-control" id="logTime" name="logTime" rows="1" placeholder="Enter time (format: hh:mm:ss)"></textarea>
+        </div>
+    
+        <!-- Min and Max Cost Fields -->
+        <div class="mb-3">
+          <label for="minCost" class="form-label">Min Cost</label>
+          <input type="number" class="form-control" id="minCost" name="minCost" min="0" step="0.01">
+        </div>
+        <div class="mb-3">
+          <label for="maxCost" class="form-label">Max Cost</label>
+          <input type="number" class="form-control" id="maxCost" name="maxCost" min="0" step="0.01">
+        </div>
+  
+        <!-- Prompt Field -->
+        <div class="mb-3">
+          <label for="promptField" class="form-label">Prompt</label>
+          <textarea class="form-control" id="promptField" name="promptField" rows="4" placeholder="Enter text here..."></textarea>
+        </div>
+  
+        <!-- Submit Button -->
+        <button type="submit" class="btn btn-primary">Submit</button>
+  
+        <!-- Reset Button -->
+        <button type="button" id="resetButton" class="btn btn-secondary ms-2">Reset</button>
+      </form>
+
+      <section class="container my-5">
+        <h2 class="text-center mb-4 page-title">Total Tokens for Selected Filters</h2>
+        <div id="tokenTotal" class="row">
+        </div>
+      </section>      
+
+      <!-- Log Output Section -->
+      <section class="container my-5">
+        <h2 class="text-center mb-4 page-title">Log Results</h2>
+        <div id="logOutput" class="row"></div>
+      </section>
+    </section>
+
+    <br><br><br>
+
+    </div>
+
+    <!-- Footer -->
+		<footer class="bg-light text-black text-center py-3">
+			<p>&copy; 2024 Final Project | Designed by Colin and Miranda</p>
+		</footer>
+    
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+  </body>
+</html>

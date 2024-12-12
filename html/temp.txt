@@ -1,0 +1,99 @@
+var URL="https://172.17.12.57/cse383-final/html/final.class.php";
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Form Example</title>
+    <!-- Include jQuery -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <!-- Include your JavaScript file -->
+    <script>
+        // Function to get levels from API and populate the dropdown
+        function getLevels() {
+            $.ajax({
+                url: '/api/v1/getLevel/',  // Your endpoint for getLevel
+                method: "GET"
+            }).done(function(data) {
+                if (data.status === 0 && data.result) {
+                    // Clear and populate the dropdown
+                    $("#level").html('<option value="">Select a Level</option>');
+                    var len = data.result.length;
+                    for (var i = 0; i < len; i++) {
+                        $("#level").append(`<option value="${data.result[i].levelID}" data-prompt="${data.result[i].prompt}">${data.result[i].description}</option>`);
+                    }
+                } else {
+                    console.log("Error: " + data.message);
+                }
+            }).fail(function(error) {
+                console.log("Error fetching levels:", error.statusText);
+            });
+        }
+
+        // Function to handle form submission
+        function submitForm() {
+            var level = $("#level").val();  // Get selected level
+            var userInput = $("#userInput").val();  // Get user input
+
+            if (!level || !userInput) {
+                alert("Please select a level and enter your question.");
+                return;
+            }
+
+            var prompt = $("#level option:selected").data("prompt");  // Get the prompt for the selected level
+            var finalInput = prompt + " " + userInput;  // Append user input to the prompt
+
+            // Call the chat API
+            $.ajax({
+                url: '/api/v1/chat',  // Assuming the chat API endpoint is '/api/v1/chat'
+                method: "POST",
+                contentType: "application/json",
+                data: JSON.stringify({
+                    prompt: finalInput
+                })
+            }).done(function(response) {
+                if (response.status === 0) {
+                    // Display the chat response in the text area
+                    $("#chatResponse").val(response.message);
+                } else {
+                    console.log("Error: " + response.message);
+                }
+            }).fail(function(error) {
+                console.log("Error calling the chat API:", error.statusText);
+            });
+        }
+
+        // Initialize the form on page load
+        $(document).ready(function() {
+            getLevels();  // Populate the dropdown with levels
+
+            // Bind the submit function to the form
+            $("#submitBtn").click(function(event) {
+                event.preventDefault();  // Prevent form submission
+                submitForm();
+            });
+        });
+    </script>
+</head>
+<body>
+    <h1>Chat Form</h1>
+    <form id="chatForm">
+        <label for="level">Choose Level:</label>
+        <select id="level" name="level">
+            <option value="">Select a Level</option>
+        </select>
+        <br><br>
+
+        <label for="userInput">Enter your question:</label>
+        <input type="text" id="userInput" name="userInput" required>
+        <br><br>
+
+        <button type="submit" id="submitBtn">Submit</button>
+    </form>
+
+    <h2>Response</h2>
+    <textarea id="chatResponse" rows="10" cols="50" readonly></textarea>
+</body>
+</html>
+

@@ -1,0 +1,27 @@
+.dynamic-navbar {
+    width: 100%;
+    z-index: 10; 
+    transition: background-color 0.3s ease-in-out;
+}
+
+.dynamic-navbar:hover {
+    background-color: rgba(0, 0, 0, 0.5) !important;
+}
+
+.nav-link {
+    color: black !important;
+    transition: color 0.3s ease-in-out;
+}
+
+.nav-link:hover {
+    color: #00aaff !important;
+}
+
+.header {
+    background-color: #91b9ec;
+}
+
+.img-fluid {
+    max-height: 200px;
+    object-fit: contain;
+}
