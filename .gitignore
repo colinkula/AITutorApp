@@ -1,0 +1,9 @@
+# Ignore SSL certificates
+mycert.crt
+mycert.key
+
+# Ignore password file
+password/.htpasswd
+
+final.tgz
+
